@@ -1,0 +1,6 @@
+bullet 29 x 25
+shoot 37 x 36
+stop 26 x 31
+fall 24 x 39
+jump 26 x 30
+walk 28 x 37

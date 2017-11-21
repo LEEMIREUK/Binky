@@ -1,0 +1,6 @@
+bullet 27 x 31
+shoot 30 x 34
+stop 30 x 34
+fall 23 x 41
+jump sprite 24 x 46
+walk sprite 34 x 35

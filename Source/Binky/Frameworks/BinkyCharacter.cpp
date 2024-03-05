@@ -11,6 +11,9 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 
+#include "BinkyPlayerController.h"
+#include "BinkyPlayerState.h"
+
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 //////////////////////////////////////////////////////////////////////////
@@ -54,6 +57,16 @@ ABinkyCharacter::ABinkyCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
 
+ABinkyPlayerController* ABinkyCharacter::GetBinkyPlayerController() const
+{
+	return CastChecked<ABinkyPlayerController>(Controller, ECastCheckedType::NullAllowed);
+}
+
+ABinkyPlayerState* ABinkyCharacter::GetBinkyPlayerState() const
+{
+	return CastChecked<ABinkyPlayerState>(GetPlayerState(), ECastCheckedType::NullAllowed);
+}
+
 void ABinkyCharacter::BeginPlay()
 {
 	// Call the base class  
@@ -86,6 +99,9 @@ void ABinkyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABinkyCharacter::Look);
+
+		// ESC Menu
+		
 	}
 	else
 	{

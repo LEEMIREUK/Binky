@@ -47,6 +47,12 @@ class ABinkyCharacter : public ACharacter
 public:
 	ABinkyCharacter();
 	
+	UFUNCTION(BlueprintCallable)
+	class ABinkyPlayerController* GetBinkyPlayerController() const;
+
+	UFUNCTION(BlueprintCallable)
+	class ABinkyPlayerState* GetBinkyPlayerState() const;
+
 
 protected:
 

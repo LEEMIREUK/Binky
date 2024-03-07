@@ -19,7 +19,7 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 //////////////////////////////////////////////////////////////////////////
 // ABinkyCharacter
 
-ABinkyCharacter::ABinkyCharacter()
+ABinkyCharacter::ABinkyCharacter(const FObjectInitializer& ObjectInitializer /*= FObjectInitializer::Get()*/) : Super(ObjectInitializer)
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -57,16 +57,6 @@ ABinkyCharacter::ABinkyCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
 
-ABinkyPlayerController* ABinkyCharacter::GetBinkyPlayerController() const
-{
-	return CastChecked<ABinkyPlayerController>(Controller, ECastCheckedType::NullAllowed);
-}
-
-ABinkyPlayerState* ABinkyCharacter::GetBinkyPlayerState() const
-{
-	return CastChecked<ABinkyPlayerState>(GetPlayerState(), ECastCheckedType::NullAllowed);
-}
-
 void ABinkyCharacter::BeginPlay()
 {
 	// Call the base class  
@@ -82,14 +72,11 @@ void ABinkyCharacter::BeginPlay()
 	}
 }
 
-//////////////////////////////////////////////////////////////////////////
-// Input
-
 void ABinkyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	// Set up action bindings
-	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
-		
+	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) 
+	{
 		// Jumping
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
@@ -101,12 +88,22 @@ void ABinkyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABinkyCharacter::Look);
 
 		// ESC Menu
-		
+		//EnhancedInputComponent->BindAction(ESCAction, ETriggerEvent::Started, this, &ABinkyCharacter::ESCMenu);
 	}
 	else
 	{
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
+}
+
+ABinkyPlayerController* ABinkyCharacter::GetBinkyPlayerController() const
+{
+	return CastChecked<ABinkyPlayerController>(Controller, ECastCheckedType::NullAllowed);
+}
+
+ABinkyPlayerState* ABinkyCharacter::GetBinkyPlayerState() const
+{
+	return CastChecked<ABinkyPlayerState>(GetPlayerState(), ECastCheckedType::NullAllowed);
 }
 
 void ABinkyCharacter::Move(const FInputActionValue& Value)
@@ -142,5 +139,14 @@ void ABinkyCharacter::Look(const FInputActionValue& Value)
 		// add yaw and pitch input to controller
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
+	}
+}
+
+void ABinkyCharacter::ESCMenu()
+{
+	ABinkyPlayerController* binkyPlayerController = GetBinkyPlayerController();
+	if (IsValid(binkyPlayerController))
+	{
+		binkyPlayerController->InputESCMenu();
 	}
 }

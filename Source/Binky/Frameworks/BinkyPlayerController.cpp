@@ -4,8 +4,13 @@
 #include "BinkyPlayerController.h"
 #include "BinkyGameState.h"
 #include "BinkyPlayerState.h"
+#include "BinkyGameInstance.h"
 
 #include "Binky/Replay/BinkyReplaySubsystem.h"
+
+#include "Binky/UI/BinkyESCMenuWidget.h"
+
+#include "Binky/Tool/BinkyInputProcessor.h"
 
 #include "ReplaySubsystem.h"
 
@@ -16,6 +21,15 @@ ABinkyPlayerController::ABinkyPlayerController(const FObjectInitializer& ObjectI
 void ABinkyPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (!GetWorld()->IsNetMode(NM_DedicatedServer))
+	{
+		UBinkyGameInstance* binkyGameInstance = GetWorld()->GetGameInstance<UBinkyGameInstance>();
+		if (IsValid(binkyGameInstance))
+		{
+			binkyGameInstance->InputProcessor->OnInputKeyDownEvent.AddUObject(this, &ABinkyPlayerController::InputESCMenu);
+		}
+	}
 }
 
 void ABinkyPlayerController::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -36,6 +50,30 @@ void ABinkyPlayerController::OnUnPossess()
 ABinkyPlayerState* ABinkyPlayerController::GetBinkyPlayerState() const
 {
 	return CastChecked<ABinkyPlayerState>(PlayerState, ECastCheckedType::NullAllowed);
+}
+
+void ABinkyPlayerController::InputESCMenu()
+{
+	IsShowESCMenu = !IsShowESCMenu;
+	if (IsShowESCMenu)
+	{
+		if (!IsValid(ESCMenuWidget.Get()))
+		{
+			ESCMenuWidget = CreateWidget<UBinkyESCMenuWidget>(this, ESCMenuWidgetClass);
+		}
+
+		if (IsValid(ESCMenuWidget.Get()))
+		{
+			ESCMenuWidget->AddToViewport();
+		}
+	}
+	else
+	{
+		if(IsValid(ESCMenuWidget.Get()))
+		{
+			ESCMenuWidget->RemoveFromParent();
+		}
+	}
 }
 
 void ABinkyPlayerController::StartToRecordReplay()

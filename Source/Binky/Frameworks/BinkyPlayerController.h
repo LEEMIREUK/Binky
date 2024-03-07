@@ -9,6 +9,9 @@
 /**
  * 
  */
+
+ class UBinkyESCMenuWidget;
+
 UCLASS()
 class BINKY_API ABinkyPlayerController : public APlayerController
 {
@@ -25,8 +28,21 @@ protected:
 	virtual void OnUnPossess() override;
 
 public:
+	UPROPERTY(EditAnywhere, Category = Widget)
+	TSubclassOf<UBinkyESCMenuWidget> ESCMenuWidgetClass;
+
+	UPROPERTY(BlueprintReadOnly)
+	TObjectPtr<UBinkyESCMenuWidget> ESCMenuWidget;
+
+public:
 	UFUNCTION(BlueprintCallable)
 	ABinkyPlayerState* GetBinkyPlayerState() const;
+
+public:
+	void InputESCMenu();
+
+private:
+	bool IsShowESCMenu = false;
 
 public:
 	UFUNCTION(BlueprintCallable)

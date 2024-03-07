@@ -20,6 +20,14 @@ class ABinkyCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
+public:
+	ABinkyCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
+
+protected:
+	virtual void BeginPlay();
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+private:
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	USpringArmComponent* CameraBoom;
@@ -44,15 +52,15 @@ class ABinkyCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* ESCAction;
+
 public:
-	ABinkyCharacter();
-	
 	UFUNCTION(BlueprintCallable)
 	class ABinkyPlayerController* GetBinkyPlayerController() const;
 
 	UFUNCTION(BlueprintCallable)
 	class ABinkyPlayerState* GetBinkyPlayerState() const;
-
 
 protected:
 
@@ -62,13 +70,7 @@ protected:
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 			
-
-protected:
-	// APawn interface
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	
-	// To add mapping context
-	virtual void BeginPlay();
+	void ESCMenu();
 
 public:
 	/** Returns CameraBoom subobject **/

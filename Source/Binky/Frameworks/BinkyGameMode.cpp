@@ -11,14 +11,19 @@
 ABinkyGameMode::ABinkyGameMode()
 {
 	// set default pawn class to our Blueprinted character
-	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/ThirdPerson/Blueprints/BP_ThirdPersonCharacter"));
+	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/Binky/Blueprints/BP_Character"));
 	if (PlayerPawnBPClass.Class != NULL)
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
 
+	static ConstructorHelpers::FClassFinder<APlayerController> PlayerControllerBPClass(TEXT("/Game/Binky/Blueprints/BP_PlayerController"));
+	if (PlayerControllerBPClass.Class != NULL)
+	{
+		PlayerControllerClass = PlayerControllerBPClass.Class;
+	}
+
 	GameStateClass = ABinkyGameState::StaticClass();
-	PlayerControllerClass = ABinkyPlayerController::StaticClass();
 	ReplaySpectatorPlayerControllerClass = ABinkyReplayPlayerController::StaticClass();
 	PlayerStateClass = ABinkyPlayerState::StaticClass();
 }

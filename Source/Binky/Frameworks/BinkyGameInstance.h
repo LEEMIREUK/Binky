@@ -9,6 +9,9 @@
 /**
  * 
  */
+
+class FBinkyInputProcessor;
+
 UCLASS()
 class BINKY_API UBinkyGameInstance : public UGameInstance
 {
@@ -17,4 +20,10 @@ class BINKY_API UBinkyGameInstance : public UGameInstance
 public:
 	UBinkyGameInstance(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
+protected:
+	virtual void Init() override;
+	virtual void Shutdown() override;
+
+public:
+	TSharedPtr<FBinkyInputProcessor> InputProcessor;
 };

@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "BinkyEditor",
+	"Description": "",
+	"Category": "Other",
+	"CreatedBy": "Binky",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "BinkyEditor",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
+		}
+	]
+}

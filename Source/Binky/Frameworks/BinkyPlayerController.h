@@ -10,7 +10,7 @@
  * 
  */
 
- class UBinkyESCMenuWidget;
+class UBinkyESCMenuWidget;
 
 UCLASS()
 class BINKY_API ABinkyPlayerController : public APlayerController

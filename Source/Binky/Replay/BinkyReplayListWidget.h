@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Binky/UI/BinkyUserWidget.h"
 #include "Blueprint/IUserObjectListEntry.h"
 #include "BinkyReplayListWidget.generated.h"
 
@@ -17,7 +18,7 @@
  struct FEnumerateStreamsResult;
 
 UCLASS()
-class BINKY_API UBinkyReplayListWidget : public UUserWidget
+class BINKY_API UBinkyReplayListWidget : public UBinkyUserWidget
 {
 	GENERATED_BODY()
 	

@@ -11,8 +11,8 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 
-#include "BinkyPlayerController.h"
-#include "BinkyPlayerState.h"
+#include "Binky/Frameworks/BinkyPlayerController.h"
+#include "Binky/Frameworks/BinkyPlayerState.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -87,8 +87,8 @@ void ABinkyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABinkyCharacter::Look);
 
-		// ESC Menu
-		//EnhancedInputComponent->BindAction(ESCAction, ETriggerEvent::Started, this, &ABinkyCharacter::ESCMenu);
+		// ESC
+		EnhancedInputComponent->BindAction(ESCAction, ETriggerEvent::Started, this, &ABinkyCharacter::ESCMenu);
 	}
 	else
 	{

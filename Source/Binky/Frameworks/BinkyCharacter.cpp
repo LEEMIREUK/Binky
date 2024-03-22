@@ -7,7 +7,6 @@
 #include "Binky/Frameworks/BinkyPlayerController.h"
 #include "Binky/Frameworks/BinkyPlayerState.h"
 
-#include "Binky/Abilities/BinkyAbilitySystemComponent.h"
 #include "Binky/Abilities/BinkyGameplayAbility.h"
 #include "Binky/Abilities/BinkyAttributeSet.h"
 
@@ -18,7 +17,7 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 ABinkyCharacter::ABinkyCharacter(const FObjectInitializer& ObjectInitializer /*= FObjectInitializer::Get()*/) : Super(ObjectInitializer)
 {
-	AbilitySystemComponent = CreateDefaultSubobject<UBinkyAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
+	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 
@@ -91,14 +90,9 @@ ABinkyPlayerState* ABinkyCharacter::GetBinkyPlayerState() const
 	return CastChecked<ABinkyPlayerState>(GetPlayerState(), ECastCheckedType::NullAllowed);
 }
 
-UBinkyAbilitySystemComponent* ABinkyCharacter::GetBinkyAbilitySystemComponent()
-{
-	return Cast<UBinkyAbilitySystemComponent>(GetAbilitySystemComponent());
-}
-
 UAbilitySystemComponent* ABinkyCharacter::GetAbilitySystemComponent() const
 {
-	return Cast<UAbilitySystemComponent>(AbilitySystemComponent);
+	return AbilitySystemComponent;
 }
 
 void ABinkyCharacter::ESCMenu()

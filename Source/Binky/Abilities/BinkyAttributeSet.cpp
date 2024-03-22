@@ -2,13 +2,11 @@
 
 
 #include "BinkyAttributeSet.h"
-#include "BinkyAbilitySystemComponent.h"
 
 #include "Net/UnrealNetwork.h"
 
 UBinkyAttributeSet::UBinkyAttributeSet()
 {
-
 }
 
 void UBinkyAttributeSet::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const

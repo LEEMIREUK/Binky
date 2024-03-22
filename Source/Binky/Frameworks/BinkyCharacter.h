@@ -11,7 +11,6 @@
 class UGameplayEffect;
 class UBinkyGameplayAbility;
 class UBinkyAttributeSet;
-class UBinkyAbilitySystemComponent;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -40,7 +39,7 @@ public:
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	TObjectPtr<UBinkyAbilitySystemComponent> AbilitySystemComponent;
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 	
 	UPROPERTY()
 	TObjectPtr<UBinkyAttributeSet> Attributes;
@@ -53,7 +52,6 @@ public:
 	TArray<TSubclassOf<UBinkyGameplayAbility>> DefaultAbilities;
 
 public:
-	UBinkyAbilitySystemComponent* GetBinkyAbilitySystemComponent();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Attributes)

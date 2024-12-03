@@ -10,6 +10,8 @@ public class BinkyEditorTarget : TargetRules
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V5;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_5;
-		ExtraModuleNames.Add("Binky");
+        ExtraModuleNames.Add("Binky");
+
+		ExtraModuleNames.Add("HitBoxTool");
 	}
 }

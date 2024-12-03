@@ -8,6 +8,11 @@
 			"Name": "Binky",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
+		},
+		{		
+			"Name": "HitBoxTool",
+			"Type": "Editor",
+			"LoadingPhase": "Default"
 		}
 	],
 	"Plugins": [

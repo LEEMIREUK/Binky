@@ -1,5 +1,7 @@
 #include "HitBoxTool.h"
 #include "ToolMenus.h"
+#include "Editor/HitBoxToolEditor.h"
+#include "Editor/HitBoxToolManager.h"
 
 IMPLEMENT_MODULE(FHitBoxTool, HitBoxTool);
 
@@ -39,5 +41,6 @@ void FHitBoxTool::RegisterHitBoxToolMenu()
 
 void FHitBoxTool::OnClickHitBoxTool()
 {
-
+    TSharedPtr<FHitBoxToolEditor> EditorToolkit(new FHitBoxToolEditor());
+    EditorToolkit->InitHitBoxToolEditor(EToolkitMode::Standalone, TSharedPtr<IToolkitHost>(), NewObject<UHitBoxToolManager>());
 }

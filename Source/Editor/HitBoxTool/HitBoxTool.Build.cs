@@ -15,13 +15,15 @@ public class HitBoxTool : ModuleRules
                 "Engine",
                 "Slate",
                 "SlateCore",
-                "UnrealEd"
             }
         );
 
         PublicDependencyModuleNames.AddRange(
             new string[] {
-                "ToolMenus"
+                "UnrealEd",
+                "ToolMenus",
+                "Persona",
+                "AdvancedPreviewScene",
             }
         );
     }
